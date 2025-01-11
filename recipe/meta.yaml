@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari_spreadsheet-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari_spreadsheet-{{ version }}.tar.gz
   sha256: 674bdb8eacd2b65af95133303046fac7d9cfef20a5888a675ff98397bcea04e2
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools >=42.0.0
     - wheel
   run:
@@ -25,7 +25,7 @@ requirements:
     - napari
     - numpy
     - pandas
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - tabulous >=0.5.0
 
@@ -38,6 +38,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-spreadsheet
